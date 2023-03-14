@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from manager import models
 
 
@@ -9,3 +9,19 @@ def departlist(request):
 
     if request.method == 'GET':
         return render(request, 'department.html', {"depart": depart})
+
+
+def adddepart(request):
+    if request.method == 'GET':
+        return render(request, 'adddepart.html')
+    title = request.POST.get("depart")
+    print(title)
+    models.Department.objects.create(title=title)
+
+    return redirect('/depart/list')
+
+
+def delete(request):
+    nid = request.GET.get('nid')
+    models.Department.objects.filter(id=nid).delete()
+    return redirect('/depart/list/')

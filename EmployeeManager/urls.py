@@ -20,5 +20,7 @@ import manager.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('department/', manager.views.departlist)
+    path('depart/list/', manager.views.departlist),
+    path('depart/add/', manager.views.adddepart),
+    path('depart/delete/',manager.views.delete)
 ]
