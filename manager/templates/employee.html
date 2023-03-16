@@ -8,7 +8,7 @@
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop"
                         style="margin-bottom: 20px">
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                    新建部门
+                    新增员工
                 </button>
             </div>
             <div class="col-md">
@@ -53,71 +53,36 @@
         <div class="card">
             <div class="card-body">
                 <i class="fa fa-list" aria-hidden="true"></i>
-                部门列表
+                员工列表
             </div>
             <div>
                 <table class="table table-striped table-bordered">
                     <thead>
                     <th style="text-align: center">ID</th>
-                    <th style="text-align: center">部门名称</th>
+                    <th style="text-align: center">姓名</th>
+                    <th style="text-align: right">密码</th>
+                    <th style="text-align: right">性别</th>
+                    <th style="text-align: right">余额</th>
+                    <th style="text-align: right">部门</th>
+                    <th style="text-align: right">加入时间</th>
                     <th style="text-align: right">操作</th>
                     </thead>
                     <tbody>
-                    {% for foo in depart %}
+                    {% for foo in employee %}
                         <tr>
                             <td style="text-align: center">{{ foo.id }}</td>
-                            <td style="text-align: center">{{ foo.title }}</td>
-                            <td style="text-align: right">
-
-                                <a href="/depart/{{ foo.id }}/edit/" class="btn btn-primary"
-                                   data-toggle="modal"
-                                   data-target="#editModal">
-                                    编辑
-                                </a>
-
-                                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <form method="post" action="/depart/edit/">
-                                                {% csrf_token %}
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">更改名称</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control"
-                                                               value="{{ row_obj.title }}">
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">
-                                                        关闭
-                                                    </button>
-                                                    <button type="button" class="btn btn-primary">保存</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <a class="btn btn-danger" href="/depart/delete/?nid={{ foo.id }}">删除</a>
-                            </td>
+                            <td style="text-align: center">{{ foo.name }}</td>
+                            <td style="text-align: center">{{ foo.password }}</td>
+                            <td style="text-align: center">{{ foo.get_gender_display }}</td>
+                            <td style="text-align: center">{{ foo.salary }}</td>
+                            <td style="text-align: center">{{ foo.depart.title }}</td>
+                            <td style="text-align: center">{{ foo.create_time|date:"Y-m-d" }}</td>
+                            <td style="text-align: center">x</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
-
-
     </div>
 {% endblock %}
-
-

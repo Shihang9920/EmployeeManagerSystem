@@ -22,6 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('depart/list/', manager.views.departlist),
     path('depart/add/', manager.views.adddepart),
-    path('depart/delete/', manager.views.delete),
-    path('', manager.views.index)
+    path('depart/delete/', manager.views.departdelete),
+    path('depart/<int:nid>/edit/', manager.views.departedit),
+    path('', manager.views.index),
+    path('login/', manager.views.login),
+    path('user/list/', manager.views.userlist)
 ]
