@@ -27,5 +27,9 @@ urlpatterns = [
     path('', manager.views.index),
     path('login/', manager.views.login),
     path('user/list/', manager.views.userlist),
-    path('user/add/',manager.views.adduser)
+    path('user/add/', manager.views.adduser),
+    path('user/<int:nid>/edit/', manager.views.useredit),
+    path('user/delete/', manager.views.userdelete),
+    path('project/list/', manager.views.projectlist),
+    path('project/add/', manager.views.projectadd),
 ]

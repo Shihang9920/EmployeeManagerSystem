@@ -1,10 +1,12 @@
 {% extends 'layout.html' %}
+
 {% block content %}
+
     <div class="container" style="margin: 40px auto">
         <div class="card">
-            <div class="card-header">添加员工</div>
+            <div class="card-header">修改员工信息</div>
             <div class="card-body">
-                <form method="post" action="/user/add/" novalidate>
+                <form method="post"  novalidate>
                     {% csrf_token %}
                     {% for foo in form %}
                         <div class="form-group">

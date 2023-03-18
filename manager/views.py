@@ -51,7 +51,7 @@ class UserForm(forms.ModelForm):
 
         widgets = {
             'name': forms.TextInput(attrs={"class": "form-control"}),
-            'password': forms.PasswordInput(attrs={"class": "form-control"}),
+            'password': forms.TextInput(attrs={"class": "form-control"}),
             'gender': forms.Select(attrs={"class": "form-control"}),
             'salary': forms.TextInput(attrs={"class": "form-control"}),
             'depart': forms.Select(attrs={"class": "form-control"}),
@@ -76,6 +76,56 @@ def adduser(request):
         return redirect('/user/list/')
     else:
         print(form.errors)
+
+    return render(request, 'adduser.html', {'form': form})
+
+
+def useredit(request, nid):
+    row_obj = models.Employees.objects.filter(id=nid).first()
+    if request.method == 'GET':
+        form = UserForm(instance=row_obj)
+        return render(request, 'useredit.html', {'form': form})
+
+    form = UserForm(data=request.POST, instance=row_obj)
+    if form.is_valid():
+        form.save()
+        return redirect('/user/list/')
+    return render(request, 'adduser.html', {'form': form})
+
+
+def userdelete(request):
+    nid = request.GET.get('nid')
+    models.Employees.objects.filter(id=nid).delete()
+    return redirect('/user/list/')
+
+
+def projectlist(request):
+    project = models.Project.objects.all()
+    return render(request, 'project.html', {'project': project})
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = models.Project
+        fields = ['name', 'Funds', 'level', 'status']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'Funds': forms.TextInput(attrs={'class': 'form-control'}),
+            'level': forms.Select(attrs={'class': 'form-control'}),
+            'status': forms.Select(attrs={'class': 'form-control'})
+        }
+
+
+def projectadd(request):
+    if request.method == 'GET':
+        form = ProjectForm()
+        return render(request, 'addproject.html', {'form': form})
+
+    form = ProjectForm(data=request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('/project/list/')
+    return render(request, 'addproject.html', {'form': form})
 
 
 def login(request):

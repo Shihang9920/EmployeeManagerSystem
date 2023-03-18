@@ -47,7 +47,10 @@
                             <td style="text-align: center">{{ foo.salary }}</td>
                             <td style="text-align: center">{{ foo.depart.title }}</td>
                             <td style="text-align: center">{{ foo.create_time|date:"Y-m-d" }}</td>
-                            <td style="text-align: center">x</td>
+                            <td style="text-align: center">
+                                <a class="btn btn-primary" href="/user/{{ foo.id }}/edit">编辑</a>
+                                <a class="btn btn-danger" href="/user/delete/?nid={{ foo.id }}">删除</a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
