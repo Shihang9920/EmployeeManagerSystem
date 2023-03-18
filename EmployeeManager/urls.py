@@ -26,5 +26,6 @@ urlpatterns = [
     path('depart/<int:nid>/edit/', manager.views.departedit),
     path('', manager.views.index),
     path('login/', manager.views.login),
-    path('user/list/', manager.views.userlist)
+    path('user/list/', manager.views.userlist),
+    path('user/add/',manager.views.adduser)
 ]
