@@ -6,10 +6,12 @@
     <title>Department</title>
     <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/font-awesome/css/font-awesome.min.css' %}">
+    {% block css %}{% endblock %}
 </head>
 <body>
 
-<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class=" navbar navbar-expand-lg navbar-dark bg-dark
+    ">
     <a class="navbar-brand" href="#">管理系统</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,5 +88,6 @@
 
 <script src="{% static 'js/jquery-3.6.3.js' %}"></script>
 <script src="{% static 'plugins/bootstrap/js/bootstrap.js' %}"></script>
+{% block js %}{% endblock %}
 </body>
 </html>

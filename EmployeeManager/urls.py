@@ -32,4 +32,5 @@ urlpatterns = [
     path('user/delete/', manager.views.userdelete),
     path('project/list/', manager.views.projectlist),
     path('project/add/', manager.views.projectadd),
+    path('project/delete/', manager.views.projectdelete),
 ]

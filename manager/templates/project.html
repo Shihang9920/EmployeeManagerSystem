@@ -42,7 +42,7 @@
                             <td>{{ foo.get_status_display }}</td>
                         <td>
                             <a class="btn btn-primary" href="/project/edit/">编辑</a>
-                            <a class="btn btn-danger" href="/project/delete/">删除</a>
+                            <a class="btn btn-danger" href="/project/delete/?nid={{ foo.id }}">删除</a>
                         </td>
                         </tr>
                     {% endfor %}

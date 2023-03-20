@@ -40,8 +40,14 @@ def departedit(request, nid):
 
 def userlist(request):
     if request.method == 'GET':
-        query_set = models.Employees.objects.all()
+        page = int(request.GET.get('page', 1))
+        start = (page - 1) * 5
+        end = page * 5
+        query_set = models.Employees.objects.all()[start:end]
         return render(request, 'employee.html', {'employee': query_set})
+    data_list = {'name__contains': request.POST.get('name')}
+    result_list = models.Employees.objects.filter(**data_list)
+    return render(request, 'employee.html', {'employee': result_list})
 
 
 class UserForm(forms.ModelForm):
@@ -126,6 +132,12 @@ def projectadd(request):
         form.save()
         return redirect('/project/list/')
     return render(request, 'addproject.html', {'form': form})
+
+
+def projectdelete(request):
+    nid = request.GET.get('nid')
+    models.Project.objects.filter(id=nid).delete()
+    return redirect('/project/list/')
 
 
 def login(request):
