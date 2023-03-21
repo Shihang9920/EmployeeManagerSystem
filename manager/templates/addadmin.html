@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <form method="post" action="/superadmin/add/" novalidate>
+            {% csrf_token %}
+            <div class="modal-body">
+            </div>
+            {% for foo in form %}
+                <div class="form-group">
+                    <label>{{ foo.label }}</label>
+                    {{ foo }}
+                </div>
+                <span style="color: red">{{ foo.errors }}</span>
+            {% endfor %}
+        <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+    </div>
+{% endblock %}

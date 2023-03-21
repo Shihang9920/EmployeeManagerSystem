@@ -27,4 +27,9 @@ class Project(models.Model):
     level_choice = ((1, '普通'), (2, '高级'), (3, '顶级'))
     level = models.SmallIntegerField(choices=level_choice, verbose_name='级别')
     status_choice = ((1, '进行中'), (2, '已交付'))
-    status = models.SmallIntegerField(choices=status_choice,verbose_name='状态')
+    status = models.SmallIntegerField(choices=status_choice, verbose_name='状态')
+
+
+class Admin(models.Model):
+    username = models.CharField(max_length=32, verbose_name='姓名')
+    password = models.CharField(max_length=64,verbose_name='密码')
