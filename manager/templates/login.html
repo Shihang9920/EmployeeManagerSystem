@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'images/background001.jpg' %}");
+            background-size: cover;
+        }
+
+        .container {
+            height: 400px;
+            width: 400px;
+            margin: 200px auto;
+            border: 1px solid #aaa;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 5px 5px 10px #aaa;
+            opacity: 1;
+            background-image: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form method="post" action="/login/" novalidate>
+        {% csrf_token %}
+        <h2 class="h2" align="center">用户登录</h2>
+        {% for foo in form %}
+            <label>{{ foo.label }}</label>
+            <div>{{ foo }}</div>
+            <span style="color: red">{{ foo.errors }}</span>
+        {% endfor %}
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">登录</button>
+    </form>
+</div>
+</body>
+</html>
