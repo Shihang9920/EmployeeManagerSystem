@@ -22,5 +22,9 @@ urlpatterns = [
     path('superadmin/add/', admin.adminadd),
 
     # login
-    path('login/', account.login)
+    path('login/', account.login),
+    path('logout/', account.logout),
+
+    # 验证码
+    path('image/code/',account.image_code)
 ]

@@ -12,15 +12,13 @@
         }
 
         .container {
-            height: 400px;
+            height: 480px;
             width: 400px;
             margin: 200px auto;
             border: 1px solid #aaa;
             border-radius: 10px;
             padding: 30px;
             box-shadow: 5px 5px 10px #aaa;
-            opacity: 1;
-            background-image: none;
         }
     </style>
 </head>
@@ -29,14 +27,31 @@
     <form method="post" action="/login/" novalidate>
         {% csrf_token %}
         <h2 class="h2" align="center">用户登录</h2>
-        {% for foo in form %}
-            <label>{{ foo.label }}</label>
-            <div>{{ foo }}</div>
-            <span style="color: red">{{ foo.errors }}</span>
-        {% endfor %}
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+
+
+        <div class="form-group">
+            <label>用户名</label>
+            {{ form.username }}
+            <span style="color: red">{{ form.username.errors.0 }}</span>
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            {{ form.password }}
+            <span style="color: red">{{ form.password.errors.0 }}</span>
+        </div>
+
+
+        <div class="form-group">
+            <label for="id_code">验证码</label>
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form.code }}
+                    <span style="color: red">{{ form.code.errors.0 }}</span>
+                </div>
+                <div class="col-sm-6">
+                    <img id="image_code" src="/image/code/" alt="验证码">
+                </div>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">登录</button>
     </form>
