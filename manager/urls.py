@@ -5,7 +5,7 @@ urlpatterns = [
     # depart
     path('depart/list/', depart.depart_list),
     path('depart/add/', depart.depart_add),
-    # path('depart/edit/', manager.view.depart.depart_edit),
+    path('depart/edit/', depart.depart_edit),
     path('depart/delete/', depart.depart_delete),
 
     # user

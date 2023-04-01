@@ -1,5 +1,7 @@
+from django.http import HttpResponse, JsonResponse
 from manager.models import Department
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
 
 
 def depart_list(request):
@@ -23,10 +25,20 @@ def depart_delete(request):
     Department.objects.filter(id=nid).delete()
     return redirect('/depart/list/')
 
-# def depart_edit(request):
-#     # if request.method == 'GET':
-#     #     row_obj = Department.objects.filter(id=nid).first()
-#     #     return render(request, 'department.html', {'row_obj': row_obj})
-#     new_title = request.POST.get('title')
-#     Department.objects.filter(title=title).update()
-#     return redirect('/depart/list')
+
+@csrf_exempt
+def depart_edit(request):
+    nid = request.GET.get('id')
+    if request.method == 'GET':
+        print(nid)
+        depart = Department.objects.get(id=nid)
+        data = {'title': depart.title}
+        print(data)
+        return JsonResponse(data)
+    if request.method == 'POST':
+        new_title = request.POST.get('title')
+        nid = request.POST.get('id')
+        print(nid, new_title)
+        Department.objects.filter(id=nid).update(title=new_title)
+        redirect_data = {'url': '/depart/list'}
+        return JsonResponse(redirect_data)

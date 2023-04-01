@@ -69,17 +69,16 @@
                             <td style="text-align: center">{{ foo.title }}</td>
                             <td style="text-align: right">
 
-                                <a href="/depart/{{ foo.id }}/edit/" class="btn"
-                                   data-toggle="modal"
-                                   data-target="#editModal">
+                                <a class="btn" data-toggle="modal" data-target="#editModal"
+                                   onclick="editDepart({{ foo.id }});">
                                     编辑
                                 </a>
-
                                 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                      aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
-                                            <form method="post" action="/depart/edit/">
+
+                                            <form method="post" action="/depart/edit/<int:{{ foo.id }}>/">
                                                 {% csrf_token %}
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">更改名称</h5>
@@ -91,7 +90,7 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control"
-                                                               value="{{ row_obj.title }}">
+                                                               value="{{ row_obj.title }}" id="edit-input" name="title">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -99,13 +98,15 @@
                                                             data-dismiss="modal">
                                                         关闭
                                                     </button>
-                                                    <button type="submit" class="btn btn-primary">保存</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                            onclick="updateDepart({{ foo.id }})">保存
+                                                    </button>
                                                 </div>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <a class="btn btn-danger" href="/depart/delete/?nid={{ foo.id }}">删除</a>
                             </td>
@@ -118,6 +119,46 @@
 
 
     </div>
+{% endblock %}
+{% block js %}
+    <script type="text/javascript">
+        function editDepart(id) {
+            console.log(id)
+            $.ajax({
+                url: '/depart/edit/',
+                type: 'GET',
+                data: {
+                    'id': id
+                },
+                success: function (data) {
+                    console.log(data.title)
+                    $('#edit-input').val(data.title)
+                },
+                error: function () {
+                    console.log('失败')
+                }
+            });
+
+        }
+        function updateDepart(id){
+            $.ajax({
+                url: '/depart/edit/',
+                type: 'POST',
+                data: {
+                    'id':id,
+                    'title': $('#edit-input').val()
+                },
+                success:function (data){
+                    window.location.replace(data.url)
+                },
+                err: function (){
+                    console.log('失败')
+                }
+            })
+        }
+
+
+    </script>
 {% endblock %}
 
 
