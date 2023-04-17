@@ -52,7 +52,7 @@ def login(request):
         request.session['info'] = {'id': admin_obj.id, 'username': admin_obj.username}
         # session保留一周
         request.session.set_expiry(60 * 60 * 24 * 7)
-        return redirect('/depart/list/')
+        return redirect('/index/')
     return render(request, 'login.html', {'form': form})
 
 

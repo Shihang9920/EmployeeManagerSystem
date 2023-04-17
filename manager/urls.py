@@ -1,5 +1,5 @@
 from django.urls import path
-from manager.view import depart, user, project, admin, account
+from manager.view import depart, user, project, admin, account, index
 
 urlpatterns = [
     # depart
@@ -26,5 +26,7 @@ urlpatterns = [
     path('logout/', account.logout),
 
     # 验证码
-    path('image/code/',account.image_code)
+    path('image/code/', account.image_code),
+
+    path('index/', index.index)
 ]

@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from manager.models import Employees
 from django import forms
@@ -36,7 +37,12 @@ class UserForm(forms.ModelForm):
 def user_add(request):
     if request.method == "GET":
         form = UserForm()
-        return render(request, 'adduser.html', {'form': form})
+        # form_data = {
+        #     'form_id': 'user-form',
+        #     'form_html': form.as_p(),
+        # }
+        return render(request, 'employee.html', {'form': form})
+        # return JsonResponse(form_data)
 
     form = UserForm(data=request.POST)
     if form.is_valid():

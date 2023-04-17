@@ -30,15 +30,12 @@ def depart_delete(request):
 def depart_edit(request):
     nid = request.GET.get('id')
     if request.method == 'GET':
-        print(nid)
         depart = Department.objects.get(id=nid)
         data = {'title': depart.title}
-        print(data)
         return JsonResponse(data)
     if request.method == 'POST':
         new_title = request.POST.get('title')
         nid = request.POST.get('id')
-        print(nid, new_title)
         Department.objects.filter(id=nid).update(title=new_title)
         redirect_data = {'url': '/depart/list'}
         return JsonResponse(redirect_data)
